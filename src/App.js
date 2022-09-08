@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 // import { PrimaryButton, SecondaryButton, TertiaryButton} from './components/Button';
 import { GlobalStyle, darkTheme, defaultTheme } from './utils';
 import { ThemeProvider } from 'styled-components';
-import { SignUpModal } from "./components/Modals";
+import { SignUpModal, SignInModal } from "./components/Modals";
+import { PrimaryButton } from "./components/Buttons"
 
 function App() {
   const [useDarkTheme, setUseDarkTheme] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <ThemeProvider theme={useDarkTheme ? darkTheme : defaultTheme}>
       <button
@@ -34,6 +37,12 @@ function App() {
       >
         Default theme
       </button>
+      <PrimaryButton
+        style={{ margin: "0 16px" }}
+        onClick={() => setShowModal(true)}
+      >
+        Show modal
+      </PrimaryButton>
       <div 
         style={{
           background: useDarkTheme
@@ -46,9 +55,10 @@ function App() {
           justifyContent: "space-around"
         }}
       >
-        <SignUpModal />
+        <SignUpModal showModal={showModal} setShowModal={setShowModal} />
+        {/* <SignInModal showModal={showModal} setShowModal={setShowModal} /> */}
+        <GlobalStyle />
       </div>
-      <GlobalStyle />
     </ThemeProvider>
   );
 }
